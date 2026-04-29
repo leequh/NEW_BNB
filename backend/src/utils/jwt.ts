@@ -57,10 +57,8 @@ export const verifyRefreshToken = (token: string): JWTPayload => {
 // 기존 호환성을 위한 함수 (deprecated)
 export const generateToken = (userId: string): string => {
   const secretKey = process.env.JWT_SECRET || "default_secret_key";
-  const options: SignOptions = {
-    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  };
-  return jwt.sign({ userId }, secretKey, options);
+  const expiresIn = process.env.JWT_EXPIRES_IN || "7d";
+  return jwt.sign({ userId }, secretKey, { expiresIn } as SignOptions);
 };
 
 export const verifyToken = (token: string): { userId: string } => {

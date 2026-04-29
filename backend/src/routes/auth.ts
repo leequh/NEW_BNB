@@ -108,7 +108,7 @@ router.post("/v2/login", async (req, res) => {
     }
 
     // JWT 토큰 페어 생성 (새로운 기능)
-    const { accessToken, refreshToken } = generateTokenPair(user.id);
+    const { accessToken, refreshToken } = generateTokenPair(user.id, user.email || "");
 
     // 하위 호환성을 위해 기존 구조 + 새로운 필드
     res.json({

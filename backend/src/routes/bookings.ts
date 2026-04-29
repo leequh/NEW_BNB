@@ -180,7 +180,7 @@ router.get("/room/:roomId", async (req, res) => {
   try {
     const { roomId } = req.params;
     const bookings = await prisma.booking.findMany({
-      where: { roomId },
+      where: { roomId: parseInt(roomId) },
       include: {
         user: {
           select: {
