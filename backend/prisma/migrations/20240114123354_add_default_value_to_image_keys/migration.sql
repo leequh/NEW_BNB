@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Room" ALTER COLUMN "imageKeys" SET DEFAULT ARRAY[]::TEXT[];

@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")    
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  refresh_token_expires_in Int?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String?   @unique
+  name          String?
+  image         String?
+  desc          String?
+  emailVerified Boolean?
+  address       String?
+  phone         String?
+  provider      String?   @default("local")
+  role          UserRole  @default(USER)
+  accounts      Account[]
+  bookings      Booking[]
+  comments      Comment[]
+  likes         Like[]
+  rooms         Room[]
+  sessions      Session[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  body      String
+  roomId    Int
+  userId    String
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, roomId])
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  userId    String
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Room {
+  id                Int        @id @default(autoincrement())
+  title             String
+  images            String[]
+  address           String
+  lat               String
+  lng               String
+  category          String
+  desc              String
+  price             Int
+  bedroomDesc       String?
+  freeCancel        Boolean    @default(false)
+  selfCheckIn       Boolean    @default(false)
+  officeSpace       Boolean    @default(false)
+  hasMountainView   Boolean    @default(false)
+  hasShampoo        Boolean    @default(false)
+  hasFreeLaundry    Boolean    @default(false)
+  hasAirConditioner Boolean    @default(false)
+  hasWifi           Boolean    @default(false)
+  hasBarbeque       Boolean    @default(false)
+  hasFreeParking    Boolean    @default(false)
+  status            RoomStatus @default(PENDING)
+  userId            String?
+  createdAt         DateTime   @default(now())
+  imageKeys         String[]
+  bookings          Booking[]
+  comments          Comment[]
+  likes             Like[]
+  user              User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+}
+
+model Faq {
+  id    Int    @id @default(autoincrement())
+  title String
+  desc  String
+}
+
+model Booking {
+  id          String        @id @default(uuid())
+  checkIn     DateTime
+  checkOut    DateTime
+  guestCount  Int
+  totalDays   Int
+  totalAmount Int
+  roomId      Int
+  userId      String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  status      BookingStatus
+  room        Room          @relation(fields: [roomId], references: [id])
+  user        User          @relation(fields: [userId], references: [id])
+  payments    Payment[]
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  bookingId      String
+  paymentKey     String?
+  amount         Int
+  type           PaymentType?
+  orderId        String        @unique
+  orderName      String?
+  mId            String?
+  method         String?
+  status         PaymentStatus
+  requestedAt    String?
+  approvedAt     String?
+  cardNumber     String?
+  cardType       String?
+  receiptUrl     String?
+  checkoutUrl    String?
+  failureCode    String?
+  failureMessage String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @default(now())
+  booking        Booking       @relation(fields: [bookingId], references: [id])
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum RoomStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum BookingStatus {
+  SUCCESS
+  CANCEL
+  PENDING
+  FAILED
+}
+
+enum PaymentType {
+  NORMAL
+  BILLING
+  BRANDPAY
+}
+
+enum PaymentStatus {
+  READY
+  IN_PROGRESS
+  WAITING_FOR_DEPOSIT
+  DONE
+  CANCELED
+  PARTIAL_CANCELED
+  ABORTED
+  EXPIRED
+}

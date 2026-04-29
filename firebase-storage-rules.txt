@@ -1,0 +1,12 @@
+// Firebase Storage Security Rules
+// Firebase Console > Storage > Rules에서 설정
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // 모든 파일에 대해 읽기/쓰기 허용 (임시)
+    match /{allPaths=**} {
+      allow read, write: if true;
+    }
+  }
+} 
