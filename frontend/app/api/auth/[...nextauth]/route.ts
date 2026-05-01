@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import NaverProvider from 'next-auth/providers/naver'
 import KakaoProvider from 'next-auth/providers/kakao'
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt' as const,
     maxAge: 60 * 60 * 24,
