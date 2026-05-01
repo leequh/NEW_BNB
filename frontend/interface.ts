@@ -1,0 +1,147 @@
+export interface RoomType {
+  id: number
+  title: string
+  images: string[]
+  imageKeys?: string[]
+  address: string
+  lat: string
+  lng: string
+  category: string
+  desc: string
+  bedroomDesc?: string
+  price: number
+  freeCancel: boolean
+  selfCheckIn: boolean
+  officeSpace: boolean
+  hasMountainView: boolean
+  hasShampoo: boolean
+  hasFreeLaundry: boolean
+  hasAirConditioner: boolean
+  hasWifi: boolean
+  hasBarbeque: boolean
+  hasFreeParking: boolean
+  userId?: string
+  user?: UserType
+  likes?: LikeType[]
+  comments?: CommentType[]
+  bookings?: BookingType[]
+  createdAt?: string
+  updatedAt?: string
+}
+
+export interface RoomFormType {
+  images: string[]
+  title: string
+  address: string
+  desc: string
+  bedroomDesc: string
+  price: number
+  category: string
+  lat: string
+  lng: string
+  freeCancel: boolean
+  selfCheckIn: boolean
+  officeSpace: boolean
+  hasMountainView: boolean
+  hasShampoo: boolean
+  hasFreeLaundry: boolean
+  hasAirConditioner: boolean
+  hasWifi: boolean
+  hasBarbeque: boolean
+  hasFreeParking: boolean
+}
+
+export interface UserType {
+  id: string
+  email?: string
+  name?: string
+  image?: string
+  phone?: string
+  address?: string
+  rooms?: RoomType[]
+  accounts?: any[]
+  sessions?: any[]
+  bookings?: BookingType[]
+  comments?: CommentType[]
+  likes?: LikeType[]
+}
+
+export interface BookingType {
+  id: number
+  roomId: number
+  userId: string
+  checkIn: string
+  checkOut: string
+  guestCount: number
+  totalAmount: number
+  totalDays?: number
+  status: string
+  createdAt?: string
+  updatedAt?: string
+  room?: RoomType
+  user?: UserType
+}
+
+export interface CommentType {
+  id: number
+  body: string
+  roomId: number
+  userId: string
+  createdAt: string
+  updatedAt?: string
+  room?: RoomType
+  user?: UserType
+}
+
+export interface LikeType {
+  id: number
+  roomId: number
+  userId: string
+  createdAt?: string
+  room?: RoomType
+  user?: UserType
+}
+
+export interface LocationType {
+  lat: string
+  lng: string
+  zoom: number
+}
+
+export interface DetailFilterType {
+  location: string
+  checkIn: string
+  checkOut: string
+  guest: number
+}
+
+export interface FilterProps {
+  location: string
+  checkIn: string
+  checkOut: string
+  guest: number
+  category: string
+}
+
+export interface SearchProps {
+  q: string | null
+}
+
+export interface ParamsProps {
+  params: {
+    id: string
+  }
+}
+
+export interface BookingParamsProps {
+  params: {
+    id: string
+  }
+  searchParams: {
+    checkIn: string
+    checkOut: string
+    guestCount: string
+    totalAmount: string
+    totalDays: string
+  }
+}
