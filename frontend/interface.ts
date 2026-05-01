@@ -7,7 +7,7 @@ export interface RoomType {
   lat: string
   lng: string
   category: string
-  desc: string
+  desc?: string
   bedroomDesc?: string
   price: number
   freeCancel: boolean
