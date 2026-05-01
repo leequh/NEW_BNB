@@ -47,6 +47,7 @@ export default function CommentListModal({
     queryFn: fetchComments,
     getNextPageParam: (lastPage: any) =>
       lastPage?.data?.length > 0 ? lastPage.page + 1 : undefined,
+    initialPageParam: 1,
   })
 
   useEffect(() => {

@@ -37,6 +37,7 @@ export default function BookingsPage() {
     queryFn: fetchBookings,
     getNextPageParam: (lastPage) =>
       lastPage.data?.length > 0 ? lastPage.page + 1 : undefined,
+    initialPageParam: 1,
     enabled: true,
   })
 

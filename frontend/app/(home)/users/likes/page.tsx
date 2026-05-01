@@ -42,6 +42,7 @@ export default function UserLikes() {
     queryFn: fetchLikes,
     getNextPageParam: (lastPage, pages) =>
       lastPage?.data?.length > 0 ? lastPage.page + 1 : undefined,
+    initialPageParam: 1,
   })
 
   if (isError) {

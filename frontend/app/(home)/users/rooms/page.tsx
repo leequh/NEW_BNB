@@ -54,6 +54,7 @@ export default function UserRooms() {
     queryFn: fetchRooms,
     getNextPageParam: (lastPage) =>
       lastPage?.data.length > 0 ? lastPage.page + 1 : undefined,
+    initialPageParam: 1,
   })
 
   // 이미지 삭제는 백엔드에서 자동으로 처리되므로 제거
