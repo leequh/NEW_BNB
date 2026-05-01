@@ -80,6 +80,7 @@ export interface BookingType {
   updatedAt?: string
   room?: RoomType
   user?: UserType
+  payments?: PaymentType[]
 }
 
 export interface CommentType {
