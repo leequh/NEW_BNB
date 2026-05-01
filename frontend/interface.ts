@@ -145,3 +145,18 @@ export interface BookingParamsProps {
     totalDays: string
   }
 }
+
+export interface PaymentType {
+  id: number
+  orderName?: string
+  method?: string
+  status?: string
+  mId?: string
+  cardNumber?: string
+  amount?: number
+  approvedAt?: string
+  receiptUrl?: string
+  bookingId?: number
+  createdAt?: string
+  updatedAt?: string
+}
