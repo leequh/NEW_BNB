@@ -47,7 +47,7 @@ export default function SignInPage() {
     }
   }
 
-  const handleEmailLogin = async (e) => {
+  const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!email || !password) {

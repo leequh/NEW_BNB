@@ -74,7 +74,7 @@ export default function UserLikes() {
           likes?.pages?.map((page, index) => (
             <React.Fragment key={index}>
               {page?.data?.map((like: LikeType) => (
-                <RoomItem room={like.room} key={like.id} />
+                like.room && <RoomItem room={like.room} key={like.id} />
               ))}
             </React.Fragment>
           ))

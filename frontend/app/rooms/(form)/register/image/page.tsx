@@ -186,7 +186,7 @@ export default function RoomRegisterImage() {
           `${process.env.NEXT_PUBLIC_API_URL}/api/rooms`,
           {
             ...roomForm,
-            price: Number(roomForm.price), // price를 숫자로 변환
+            price: Number(roomForm?.price || 0),
             images: imageUrls,
           },
           {
@@ -210,7 +210,6 @@ export default function RoomRegisterImage() {
       } catch (error) {
         console.error('Backend API error:', error)
         toast.error('API 요청 중 문제가 발생했습니다.')
-        deleteImages()
         setDisableSubmit(false)
       }
     } catch (e) {

@@ -30,25 +30,25 @@ export interface RoomType {
 }
 
 export interface RoomFormType {
-  images: string[]
-  title: string
-  address: string
-  desc: string
-  bedroomDesc: string
-  price: number
-  category: string
-  lat: string
-  lng: string
-  freeCancel: boolean
-  selfCheckIn: boolean
-  officeSpace: boolean
-  hasMountainView: boolean
-  hasShampoo: boolean
-  hasFreeLaundry: boolean
-  hasAirConditioner: boolean
-  hasWifi: boolean
-  hasBarbeque: boolean
-  hasFreeParking: boolean
+  images?: string[]
+  title?: string
+  address?: string
+  desc?: string
+  bedroomDesc?: string
+  price?: number
+  category?: string
+  lat?: string
+  lng?: string
+  freeCancel?: boolean
+  selfCheckIn?: boolean
+  officeSpace?: boolean
+  hasMountainView?: boolean
+  hasShampoo?: boolean
+  hasFreeLaundry?: boolean
+  hasAirConditioner?: boolean
+  hasWifi?: boolean
+  hasBarbeque?: boolean
+  hasFreeParking?: boolean
 }
 
 export interface UserType {
@@ -58,6 +58,7 @@ export interface UserType {
   image?: string
   phone?: string
   address?: string
+  desc?: string
   rooms?: RoomType[]
   accounts?: any[]
   sessions?: any[]
@@ -94,6 +95,13 @@ export interface CommentType {
   user?: UserType
 }
 
+export interface CommentApiType {
+  totalCount: number
+  data: CommentType[]
+  page: number
+  totalPage: number
+}
+
 export interface LikeType {
   id: number
   roomId: number
@@ -109,12 +117,7 @@ export interface LocationType {
   zoom: number
 }
 
-export interface DetailFilterType {
-  location: string
-  checkIn: string
-  checkOut: string
-  guest: number
-}
+export type DetailFilterType = 'location' | 'checkIn' | 'checkOut' | 'guest' | null
 
 export interface FilterProps {
   location: string
@@ -122,6 +125,13 @@ export interface FilterProps {
   checkOut: string
   guest: number
   category: string
+}
+
+export interface FilterLayoutProps {
+  title: string
+  dataTitle?: string
+  children: React.ReactNode
+  isShow: boolean
 }
 
 export interface SearchProps {
@@ -158,6 +168,14 @@ export interface PaymentType {
   approvedAt?: string
   receiptUrl?: string
   bookingId?: number
+  createdAt?: string
+  updatedAt?: string
+}
+
+export interface FaqType {
+  id: number
+  title: string
+  desc: string
   createdAt?: string
   updatedAt?: string
 }

@@ -4,7 +4,7 @@
 import { useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
 import CommentListModal from './CommentListModal'
-import { CommentApiType } from '@/interface'
+import { CommentApiType, CommentType } from '@/interface'
 import { Loader } from '../Loader'
 
 import dayjs from 'dayjs'
@@ -38,7 +38,7 @@ export default function CommentList({
         {isLoading ? (
           <Loader className="md:col-span-2" />
         ) : (
-          comments?.data?.map((comment) => (
+          comments?.data?.map((comment: CommentType) => (
             <div key={comment?.id} className="flex flex-col gap-2">
               <div className="flex gap-2 items-center">
                 <img
