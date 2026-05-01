@@ -162,7 +162,7 @@ export default function RoomRegisterImage() {
           try {
             // 카카오 로그인 사용자를 Backend에 생성/찾기
             const createUserResponse = await axios.post(
-              'http://localhost:5000/api/auth/social-login',
+              `${process.env.NEXT_PUBLIC_API_URL}/api/auth/social-login`,
               {
                 name: session.user.name,
                 email: `${session.user.id}@kakao.user`, // 카카오 사용자용 임시 이메일
@@ -183,7 +183,7 @@ export default function RoomRegisterImage() {
         }
 
         const result = await axios.post(
-          'http://localhost:5000/api/rooms',
+          `${process.env.NEXT_PUBLIC_API_URL}/api/rooms`,
           {
             ...roomForm,
             price: Number(roomForm.price), // price를 숫자로 변환

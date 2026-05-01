@@ -29,7 +29,7 @@ export default function UserRooms() {
 
   const fetchRooms = async ({ pageParam = 1 }) => {
     const { data } = await axios(
-      'http://localhost:5000/api/rooms?my=true&page=' + pageParam,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/rooms?my=true&page=` + pageParam,
       {
         params: {
           limit: 12,
@@ -65,7 +65,7 @@ export default function UserRooms() {
       try {
         // 이미지 삭제는 백엔드에서 자동으로 처리됨
         const result = await axios.delete(
-          `http://localhost:5000/api/rooms/${data.id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${data.id}`,
         )
 
         if (result.status === 204) {

@@ -13,7 +13,7 @@ export default function LikeButton({ room }: { room: RoomType }) {
   const { data: session } = useSession()
 
   const fetchRoom = async () => {
-    const { data } = await axios(`http://localhost:5000/api/rooms/${room.id}`)
+    const { data } = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${room.id}`)
     return data as RoomType
   }
 

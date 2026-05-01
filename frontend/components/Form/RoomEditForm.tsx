@@ -119,7 +119,7 @@ export default function RoomEditForm({ data }: { data: RoomType }) {
         try {
           const imageUrls = await uploadImages()
           const result = await axios.patch(
-            `http://localhost:5000/api/rooms/${data.id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${data.id}`,
             {
               ...res,
               price: Number(res.price),

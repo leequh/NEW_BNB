@@ -82,7 +82,7 @@ export default async function BookingPage({
 async function getData(id: string) {
   try {
     const res = await fetch(
-      `http://localhost:5000/api/rooms/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/rooms/${id}`,
       {
         cache: 'no-store',
       },

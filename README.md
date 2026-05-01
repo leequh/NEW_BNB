@@ -676,3 +676,4 @@ allow read, write: if request.time < timestamp.date(2025, 1, 15);
 
 ===================================================
   배포  backend는 render // https://dashboard.render.com/ ( 테스트단계에서)
+ 이 코드는 github에  NEW_BNB에  업로드

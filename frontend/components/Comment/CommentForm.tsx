@@ -23,7 +23,7 @@ export default function CommentForm({
       const authToken = '6bd44bbb-8d19-4f5f-be41-aea834a0b7f1'
       
       const res = await axios.post(
-        'http://localhost:5000/api/comments',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/comments`,
         {
           body: comment,
           roomId: room.id,

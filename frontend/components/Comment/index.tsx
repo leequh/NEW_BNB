@@ -10,7 +10,7 @@ import axios from 'axios'
 export default function Comment({ room }: { room: RoomType }) {
   const fetchComments = async () => {
     const { data } = await axios(
-      `http://localhost:5000/api/comments?roomId=${room.id}&limit=6`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/comments?roomId=${room.id}&limit=6`,
     )
     return data
   }

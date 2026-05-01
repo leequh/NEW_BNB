@@ -63,7 +63,7 @@ export async function uploadMultipleImages(
       formData.append('images', file)
     })
 
-    const response = await fetch('http://localhost:5000/api/images/upload-public', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/upload-public`, {
       method: 'POST',
       body: formData,
     })

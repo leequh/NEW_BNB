@@ -25,7 +25,7 @@ export default function Map({ rooms = [] }: { rooms?: RoomType[] }) {
   const [isError, setIsError] = useState(false)
 
   const fetchRooms = async () => {
-    const { data } = await axios('http://localhost:5000/api/rooms')
+    const { data } = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/rooms`)
     return data as RoomType[]
   }
 

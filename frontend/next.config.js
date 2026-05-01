@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -31,15 +33,15 @@ const nextConfig = {
       // },
       {
         source: '/api/rooms/:path*',
-        destination: 'http://localhost:5000/api/rooms/:path*',
+        destination: `${API_URL}/api/rooms/:path*`,
       },
       {
         source: '/api/bookings/:path*',
-        destination: 'http://localhost:5000/api/bookings/:path*',
+        destination: `${API_URL}/api/bookings/:path*`,
       },
       {
         source: '/api/users/:path*',
-        destination: 'http://localhost:5000/api/users/:path*',
+        destination: `${API_URL}/api/users/:path*`,
       },
       // Temporarily commented out until backend implements these
       // {

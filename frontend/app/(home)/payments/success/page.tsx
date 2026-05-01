@@ -136,7 +136,7 @@ async function getPayment({
     // 성공이면 Payment 및 Booking 데이터 PATCH
     if (payment) {
       await axios.patch(
-        `http://localhost:5000/api/payments`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/payments`,
         {
           orderId: orderId,
           paymentKey: paymentKey,
@@ -177,7 +177,7 @@ async function getPayment({
     }
 
     await axios.patch(
-      `http://localhost:5000/api/payments`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/payments`,
       {
         orderId: orderId,
         paymentKey: paymentKey,

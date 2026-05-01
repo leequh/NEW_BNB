@@ -96,7 +96,8 @@ export default function Home() {
   const fetchRooms = async ({ pageParam = 1 }) => {
     try {
       const { data } = await axios(
-        'http://localhost:5000/api/rooms?page=' + pageParam,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/rooms?page=` + pageParam,
+        // 'http://localhost:5000/api/rooms?page=' + pageParam,
         {
           params: {
             limit: 12,

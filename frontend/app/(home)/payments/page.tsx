@@ -168,7 +168,7 @@ export default function PaymentPage() {
       console.log('bookingId 존재 여부:', !!bookingId)
 
       const res = await axios.post(
-        'http://localhost:5000/api/payments',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/payments`,
         {
           bookingId: bookingId,
           amount: price,
@@ -374,7 +374,7 @@ export default function PaymentPage() {
                   console.log('실제 결제 - bookingId 존재 여부:', !!bookingId)
 
                   const res = await axios.post(
-                    'http://localhost:5000/api/payments',
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/payments`,
                     {
                       bookingId: bookingId,
                       amount: price,
