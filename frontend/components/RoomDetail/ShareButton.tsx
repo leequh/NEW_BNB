@@ -130,7 +130,7 @@ export default function ShareButton({ data }: { data: RoomType }) {
                     </button>
                     {typeof window !== 'undefined' && (
                       <Link
-                        href={`mailto:?subject=FastCampus 숙소 공유하기&body=${window.location.href}`}
+                        href={`mailto:?subject=LUXLAS 숙소 공유하기&body=${window.location.href}`}
                         className="border border-gray-300 font-semibold rounded-lg px-6 py-4 flex items-center gap-4 hover:bg-black/5"
                       >
                         <AiOutlineMail className="text-xl md:text-3xl" />
