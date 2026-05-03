@@ -1,6 +1,6 @@
-# NextBnB Frontend
+# LUXLAS Frontend
 
-NextBnB 프로젝트의 프론트엔드 애플리케이션입니다.
+LUXLAS 프로젝트의 프론트엔드 애플리케이션입니다.
 
 ## 기술 스택
 

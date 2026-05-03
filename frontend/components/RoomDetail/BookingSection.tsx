@@ -23,7 +23,7 @@ export default function BookingSection({ data }: { data: RoomType }) {
     const validDayCount = Math.max(dayCount || 0, 0)
     const validGuestCount = Math.max(guestCount || 1, 1)
     const baseAmount = (data?.price || 0) * validDayCount
-    const serviceFee = 0 // nextBnb 수수료
+    const serviceFee = 0 // LUXLAS 수수료
     const cleaningFee = validDayCount > 0 ? 15000 : 0 // 청소비
     const totalAmount = baseAmount + serviceFee + cleaningFee
 
@@ -262,7 +262,7 @@ export default function BookingSection({ data }: { data: RoomType }) {
 
               <div className="flex justify-between items-center group">
                 <div className="text-gray-600 underline underline-offset-4 cursor-pointer group-hover:text-gray-800 transition-colors">
-                  nextBnb 서비스 수수료
+                  LUXLAS 서비스 수수료
                 </div>
                 <div className="text-gray-800">
                   ₩{calculations.serviceFee?.toLocaleString()}
