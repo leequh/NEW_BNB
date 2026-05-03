@@ -193,6 +193,53 @@ export default function Navbar() {
         </div>
       )}
 
+      {/* 모바일 메뉴 버튼 */}
+      <div className="flex md:hidden relative">
+        <button
+          id="mobile-menu-btn"
+          aria-label="mobile-menu-btn"
+          type="button"
+          onClick={() => setShowMenu((val) => !val)}
+          className="flex align-middle gap-2 rounded-full border border-gray-20 shadow-sm px-3 py-2 my-auto hover:shadow-lg"
+        >
+          <AiOutlineMenu />
+          <AiOutlineUser />
+        </button>
+        {showMenu && (
+          <div className="border border-gray-200 shadow-lg py-2 flex flex-col absolute top-12 right-0 bg-white w-48 rounded-lg z-50">
+            {status === 'unauthenticated'
+              ? LOGOUT_USER_MENU?.map((menu) => (
+                  <button
+                    type="button"
+                    key={menu.id}
+                    className="h-10 hover:bg-gray-50 pl-3 text-sm text-gray-700 text-left"
+                    onClick={() => {
+                      router.push(menu.url)
+                      setShowMenu(false)
+                    }}
+                  >
+                    {menu.title}
+                  </button>
+                ))
+              : LOGIN_USER_MENU?.map((menu) => (
+                  <button
+                    type="button"
+                    key={menu.id}
+                    className="h-10 hover:bg-gray-50 pl-3 text-sm text-gray-700 text-left"
+                    onClick={() => {
+                      menu.signOut ? signOut({ callbackUrl: '/' }) : null
+                      router.push(menu.url)
+                      setShowMenu(false)
+                    }}
+                  >
+                    {menu.title}
+                  </button>
+                ))}
+          </div>
+        )}
+      </div>
+
+      {/* 데스크탑 메뉴 */}
       <div className="grow basis-0 hidden md:flex gap-4 align-middle justify-end relative">
         {status === 'authenticated' ? (
           <Link
