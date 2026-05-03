@@ -10,18 +10,18 @@ import { AuthProvider as JWTAuthProvider } from '@/contexts/AuthContext'
 const nunito = Nunito({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://fastcampus-nextbnb.vercel.app'),
+  metadataBase: new URL('https://new-bnb-seven.vercel.app'),
   alternates: {
     canonical: '/',
   },
-  title: 'Fastcampus Nextbnb로 여행하기',
-  description: 'Fastcampus Nextbnb로 여행을 계획해보세요.',
-  keywords: ['Nextbnb', '여행', '숙소', '호텔', '펜션', '최저가'],
+  title: 'LUXLAS로 여행하기',
+  description: 'LUXLAS로 여행을 계획해보세요.',
+  keywords: ['LUXLAS', '여행', '숙소', '호텔', '펜션', '최저가'],
   openGraph: {
-    title: 'nextbnb로 여행하기',
-    description: 'nextbnb로 여행을 계획해보세요',
-    url: 'https://fastcampus-nextbnb.vercel.app',
-    siteName: 'Fastcampus Nextbnb',
+    title: 'LUXLAS로 여행하기',
+    description: 'LUXLAS로 여행을 계획해보세요',
+    url: 'https://new-bnb-seven.vercel.app',
+    siteName: 'LUXLAS',
     locale: 'ko_KR',
     type: 'website',
   },
