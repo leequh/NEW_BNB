@@ -15,7 +15,7 @@ export default function UserMyPage() {
         <div className="font-semibold">{session?.user?.name || '사용자'}</div>
         <div className="font-semibold">·</div>
         <div className="text-gray-700">
-          {session?.user?.email || 'user@fastcampus.com'}
+          {session?.user?.email || 'user@luxlas.com'}
         </div>
       </div>
       <div className="grid md:grid-cols-3 gap-4 mt-12 mb-20">

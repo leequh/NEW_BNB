@@ -116,7 +116,7 @@ export default function SignInPage() {
         </h1>
         <hr className="border-b-gray-300" />
         <div className="text-xl md:text-2xl font-semibold">
-          Fastcampus Nextbnb에 오신 것을 환영합니다.
+          LUXLAS에 오신 것을 환영합니다.
         </div>
       </div>
 

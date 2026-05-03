@@ -27,7 +27,7 @@ export default function PaymentPage() {
   const price = searchParams.get('totalAmount') || '0'
   const customerKey = searchParams.get('customerKey') || uuidv4()
   const totalDays = searchParams.get('totalDays') || '0'
-  const roomTitle = searchParams.get('roomTitle') || 'Fastcampus NextBnB'
+  const roomTitle = searchParams.get('roomTitle') || 'LUXLAS'
   const bookingId = searchParams.get('bookingId')
   const [isWidgetLoaded, setIsWidgetLoaded] = useState(false)
   const [paymentError, setPaymentError] = useState<string | null>(null)

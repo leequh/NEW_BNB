@@ -54,7 +54,7 @@ export default function Navbar() {
       <div className="grow basis-0 hidden font-semibold text-lg sm:text-xl text-rose-500 cursor-pointer sm:flex sm:gap-2">
         <MdModeOfTravel className="text-4xl my-auto" />
         <Link href="/" className="my-auto block">
-          Nextbnb
+          LUXLAS
         </Link>
       </div>
       {showFilter === false ? (

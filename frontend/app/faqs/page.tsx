@@ -4,9 +4,9 @@ import { inter } from '@/app/fonts'
 import cn from 'classnames'
 
 export const metadata: Metadata = {
-  title: 'nextbnb 도움말',
-  description: 'nextbnb에 궁금한 점을 확인하세요',
-  keywords: ['nextbnb', '도움말', '정보', '여행 팁', '숙소 팁'],
+  title: 'LUXLAS 도움말',
+  description: 'LUXLAS에 궁금한 점을 확인하세요',
+  keywords: ['LUXLAS', '도움말', '정보', '여행 팁', '숙소 팁'],
 }
 
 export default async function FaqPage() {

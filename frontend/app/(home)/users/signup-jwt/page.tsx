@@ -83,7 +83,7 @@ export default function SignUpJWTPage() {
         <h1 className="text-lg font-semibold text-center">JWT 회원가입</h1>
         <hr className="border-b-gray-300" />
         <div className="text-xl md:text-2xl font-semibold">
-          Fastcampus Nextbnb 계정 만들기
+          LUXLAS 계정 만들기
         </div>
       </div>
 

@@ -74,9 +74,9 @@ export async function generateMetadata(
   const prevKeywords = (await parent)?.keywords || []
 
   return {
-    title: `Nextbnb 숙소 - ${room?.title}`,
+    title: `LUXLAS 숙소 - ${room?.title}`,
     description:
-      room?.description ?? 'Fastcampus Nextbnb로 여행을 계획해보세요.',
+      room?.description ?? 'LUXLAS로 여행을 계획해보세요.',
     keywords: [room?.category, ...prevKeywords],
   }
 }
