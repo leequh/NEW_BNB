@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { MdModeOfTravel } from 'react-icons/md'
@@ -40,6 +40,33 @@ export default function Navbar() {
   const filterValue = useRecoilValue(filterState)
 
   const router = useRouter()
+  const filterRef = useRef<HTMLDivElement>(null)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const desktopMenuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node)
+      ) {
+        setShowFilter(false)
+        setDetailFilter(null)
+      }
+      const isClickInsideMobileMenu =
+        mobileMenuRef.current?.contains(event.target as Node)
+      const isClickInsideDesktopMenu =
+        desktopMenuRef.current?.contains(event.target as Node)
+      if (!isClickInsideMobileMenu && !isClickInsideDesktopMenu) {
+        setShowMenu(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [setDetailFilter])
 
   return (
     <nav
@@ -82,7 +109,7 @@ export default function Navbar() {
           </button>
         </div>
       ) : (
-        <div className="sm:w-[340px] cursor-pointer w-full relative">
+        <div ref={filterRef} className="sm:w-[340px] cursor-pointer w-full relative">
           <div className="flex justify-center gap-7 h-14 text-center items-center">
             <button
               type="button"
@@ -194,7 +221,7 @@ export default function Navbar() {
       )}
 
       {/* 모바일 메뉴 버튼 */}
-      <div className="flex md:hidden relative">
+      <div ref={mobileMenuRef} className="flex md:hidden relative">
         <button
           id="mobile-menu-btn"
           aria-label="mobile-menu-btn"
@@ -240,7 +267,7 @@ export default function Navbar() {
       </div>
 
       {/* 데스크탑 메뉴 */}
-      <div className="grow basis-0 hidden md:flex gap-4 align-middle justify-end relative">
+      <div ref={desktopMenuRef} className="grow basis-0 hidden md:flex gap-4 align-middle justify-end relative">
         {status === 'authenticated' ? (
           <Link
             href={FormUrl.CATEGORY}
