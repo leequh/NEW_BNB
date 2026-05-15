@@ -119,20 +119,6 @@ export default function Navbar() {
             </button>
             <button
               type="button"
-              className="text-gray-700"
-              onClick={() => window.alert('서비스 준비중입니다.')}
-            >
-              체험
-            </button>
-            <button
-              type="button"
-              className="text-gray-700"
-              onClick={() => window.alert('서비스 준비중입니다.')}
-            >
-              온라인 체험
-            </button>
-            <button
-              type="button"
               className="underline underline-offset-8 text-gray-500 hover:text-black"
               onClick={() => setShowFilter(false)}
             >
