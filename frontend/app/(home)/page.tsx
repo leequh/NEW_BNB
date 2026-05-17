@@ -16,6 +16,18 @@ import SelectedRoom from '@/components/Map/SelectedRoom'
 import { useRecoilValue } from 'recoil'
 import { filterState } from '@/atom'
 
+// 서울 지역 좌표 데이터 (실제 주소에 맞는 좌표)
+const seoulLocations = [
+  { lat: '37.5704', lng: '126.9831', area: '종로구 종로1가', address: '서울특별시 종로구 종로1가 24' },
+  { lat: '37.4980', lng: '127.0280', area: '강남구 역삼동', address: '서울특별시 강남구 역삼동 823' },
+  { lat: '37.5636', lng: '126.9827', area: '중구 명동', address: '서울특별시 중구 명동2가 54' },
+  { lat: '37.4837', lng: '127.0324', area: '서초구 서초동', address: '서울특별시 서초구 서초동 1303' },
+  { lat: '37.5125', lng: '127.1025', area: '송파구 잠실동', address: '서울특별시 송파구 잠실동 40' },
+  { lat: '37.5340', lng: '126.9948', area: '용산구 이태원동', address: '서울특별시 용산구 이태원동 116' },
+  { lat: '37.5563', lng: '126.9238', area: '마포구 서교동', address: '서울특별시 마포구 서교동 395' },
+  { lat: '37.5010', lng: '127.0396', area: '강남구 대치동', address: '서울특별시 강남구 대치동 943' },
+]
+
 // Mock data for testing
 const mockRooms: RoomType[] = Array.from({ length: 8 }).map((_, i) => ({
   id: i + 1,
@@ -45,9 +57,7 @@ const mockRooms: RoomType[] = Array.from({ length: 8 }).map((_, i) => ({
             ? '아파트'
             : '고시원'
   } ${i + 1}`,
-  address: `서울특별시 ${i % 2 === 0 ? '강남구' : '종로구'} 샘플동 ${
-    i + 1
-  }번지`,
+  address: seoulLocations[i].address,
   price: 50000 + i * 10000,
   category:
     i % 5 === 0
@@ -59,8 +69,8 @@ const mockRooms: RoomType[] = Array.from({ length: 8 }).map((_, i) => ({
           : i % 2 === 0
             ? '아파트'
             : '고시원',
-  lat: '37.565337',
-  lng: '126.9772095',
+  lat: seoulLocations[i].lat,
+  lng: seoulLocations[i].lng,
   freeCancel: true,
   selfCheckIn: true,
   officeSpace: false,
