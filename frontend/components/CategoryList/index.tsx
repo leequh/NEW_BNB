@@ -13,7 +13,7 @@ export default function CategoryList() {
     <div className="flex justify-evenly fixed top-20 inset-x-0 mx-auto w-full bg-white z-10 mb-6 sm:px-24 px-4">
       <button
         data-cy="category-filter-all"
-        className="justify-center gap-3 py-4 text-center"
+        className="justify-center gap-3 py-4 text-center group"
         onClick={() => {
           setFilterValue({
             ...filterValue,
@@ -23,17 +23,39 @@ export default function CategoryList() {
       >
         <div
           className={cn(
-            'flex flex-col justify-center gap-3 text-gray-500 hover:text-gray-700 cursor-pointer',
+            'flex flex-col justify-center gap-3 cursor-pointer transition-all duration-300',
             {
-              'underline underline-offset-8 font-semibold text-black':
-                filterValue.category === '',
+              'text-black': filterValue.category === '',
+              'text-gray-500 hover:text-gray-700': filterValue.category !== '',
             },
           )}
         >
-          <div className="text-2xl mx-auto">
-            <BiReset />
+          <div
+            className={cn(
+              'text-2xl mx-auto transition-transform duration-300 group-hover:scale-110',
+              {
+                'scale-110': filterValue.category === '',
+              },
+            )}
+          >
+            <BiReset
+              className={cn('transition-transform duration-300', {
+                'rotate-180': filterValue.category === '',
+              })}
+            />
           </div>
-          <div className="text-xs">전체</div>
+          <div className="text-xs relative">
+            전체
+            <span
+              className={cn(
+                'absolute -bottom-2 left-0 w-full h-0.5 bg-black transition-transform duration-300 origin-center',
+                {
+                  'scale-x-100': filterValue.category === '',
+                  'scale-x-0': filterValue.category !== '',
+                },
+              )}
+            />
+          </div>
         </div>
       </button>
       {CATEGORY_DATA?.map((category) => (
@@ -47,20 +69,39 @@ export default function CategoryList() {
               category: category.title,
             })
           }
-          className={cn(
-            'text-gray-500 hover:text-gray-700 gap-3 justify-center py-4 text-center',
-            {
-              'text-black font-semibold underline underline-offset-8':
-                filterValue.category === category.title,
-            },
-          )}
+          className="gap-3 justify-center py-4 text-center group"
         >
-          <div className="flex-col flex justify-center gap-3">
-            <div className="text-2xl mx-auto">
+          <div
+            className={cn(
+              'flex-col flex justify-center gap-3 transition-all duration-300',
+              {
+                'text-black': filterValue.category === category.title,
+                'text-gray-500 hover:text-gray-700':
+                  filterValue.category !== category.title,
+              },
+            )}
+          >
+            <div
+              className={cn(
+                'text-2xl mx-auto transition-transform duration-300 group-hover:scale-110',
+                {
+                  'scale-110': filterValue.category === category.title,
+                },
+              )}
+            >
               <category.Icon />
             </div>
-            <div className="text-gray-700 text-xs text-center">
+            <div className="text-xs text-center relative">
               {category.title}
+              <span
+                className={cn(
+                  'absolute -bottom-2 left-0 w-full h-0.5 bg-black transition-transform duration-300 origin-center',
+                  {
+                    'scale-x-100': filterValue.category === category.title,
+                    'scale-x-0': filterValue.category !== category.title,
+                  },
+                )}
+              />
             </div>
           </div>
         </button>

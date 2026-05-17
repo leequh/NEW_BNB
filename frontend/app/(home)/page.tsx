@@ -1,10 +1,8 @@
 'use client'
 import React, { useEffect, useRef } from 'react'
-// import each from 'lodash/each'
 import CategoryList from '@/components/CategoryList'
 import { GridLayout, RoomItem } from '@/components/RoomList'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 
 import axios from 'axios'
 
@@ -12,7 +10,8 @@ import { RoomType } from '@/interface'
 import { Loader, LoaderGrid } from '@/components/Loader'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 
-import { MapButton } from '@/components/Map'
+import Map from '@/components/Map'
+import SelectedRoom from '@/components/Map/SelectedRoom'
 
 import { useRecoilValue } from 'recoil'
 import { filterState } from '@/atom'
@@ -75,14 +74,6 @@ const mockRooms: RoomType[] = Array.from({ length: 8 }).map((_, i) => ({
 }))
 
 export default function Home() {
-  // const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  // each(arr, (num) => {
-  //   console.log('hello world')
-  // })
-  // _.each(arr, (num) => {
-  //   console.log(num, 'hello world')
-  // })
-  const router = useRouter()
   const ref = useRef<HTMLDivElement | null>(null)
   const filterValue = useRecoilValue(filterState)
   const pageRef = useIntersectionObserver(ref, {})
@@ -151,26 +142,69 @@ export default function Home() {
   const roomsToShow =
     isError || !rooms?.pages ? [{ data: mockRooms }] : rooms.pages
 
+  const allRooms = roomsToShow.flatMap((page) => page?.data || [])
+
+  // 카테고리가 선택되지 않았을 때: 원래 홈페이지 레이아웃
+  if (!filterValue.category) {
+    return (
+      <>
+        <CategoryList />
+        <GridLayout>
+          {isLoading ? (
+            <LoaderGrid />
+          ) : (
+            roomsToShow.map((page, index) => (
+              <React.Fragment key={index}>
+                {page?.data &&
+                  page.data.map((room: RoomType) => (
+                    <RoomItem room={room} key={room.id} />
+                  ))}
+              </React.Fragment>
+            ))
+          )}
+        </GridLayout>
+        {(isFetching || hasNextPage || isFetchingNextPage) && <Loader />}
+        <div className="w-full touch-none h-10 mb-10" ref={ref} />
+      </>
+    )
+  }
+
+  // 카테고리가 선택되었을 때: 분할 뷰 (왼쪽 목록 + 오른쪽 지도)
   return (
     <>
       <CategoryList />
-      <GridLayout>
-        {isLoading ? (
-          <LoaderGrid />
-        ) : (
-          roomsToShow.map((page, index) => (
-            <React.Fragment key={index}>
-              {page?.data &&
-                page.data.map((room: RoomType) => (
-                  <RoomItem room={room} key={room.id} />
-                ))}
-            </React.Fragment>
-          ))
-        )}
-      </GridLayout>
-      <MapButton onClick={() => router.push('/map')} />
-      {(isFetching || hasNextPage || isFetchingNextPage) && <Loader />}
-      <div className="w-full touch-none h-10 mb-10" ref={ref} />
+      <div className="flex mt-20 h-[calc(100vh-80px)]">
+        {/* 왼쪽: 숙소 목록 */}
+        <div className="w-1/2 overflow-y-auto px-4 pb-10">
+          <div className="sticky top-0 bg-white py-3 z-10 border-b mb-4">
+            <h2 className="text-lg font-semibold">
+              <span className="text-rose-500">{filterValue.category}</span> 숙소 목록
+            </h2>
+            <p className="text-sm text-gray-500">
+              총 {allRooms.length}개의 숙소
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {isLoading ? (
+              <LoaderGrid />
+            ) : (
+              allRooms.map((room: RoomType) => (
+                <RoomItem room={room} key={room.id} />
+              ))
+            )}
+          </div>
+          
+          {(isFetching || hasNextPage || isFetchingNextPage) && <Loader />}
+          <div className="w-full touch-none h-10" ref={ref} />
+        </div>
+
+        {/* 오른쪽: 지도 */}
+        <div className="w-1/2 sticky top-20 h-[calc(100vh-80px)]">
+          <Map rooms={allRooms} />
+          <SelectedRoom />
+        </div>
+      </div>
     </>
   )
 }

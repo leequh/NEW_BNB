@@ -15,7 +15,7 @@ import cn from 'classnames'
 
 import Link from 'next/link'
 import { SearchFilter } from './Filter'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { detailFilterState, filterState } from '@/atom'
 import { signOut, useSession } from 'next-auth/react'
 import { FormUrl } from '@/constants'
@@ -38,6 +38,14 @@ export default function Navbar() {
   const { status, data: session } = useSession()
   const [detailFilter, setDetailFilter] = useRecoilState(detailFilterState)
   const filterValue = useRecoilValue(filterState)
+  const setFilterValue = useSetRecoilState(filterState)
+
+  const handleLogoClick = () => {
+    setFilterValue({
+      ...filterValue,
+      category: '',
+    })
+  }
 
   const router = useRouter()
   const filterRef = useRef<HTMLDivElement>(null)
@@ -78,12 +86,14 @@ export default function Navbar() {
         },
       )}
     >
-      <div className="grow basis-0 hidden font-semibold text-lg sm:text-xl text-rose-500 cursor-pointer sm:flex sm:gap-2">
+      <Link 
+        href="/" 
+        onClick={handleLogoClick}
+        className="grow basis-0 hidden font-semibold text-lg sm:text-xl text-rose-500 cursor-pointer sm:flex sm:gap-2"
+      >
         <MdModeOfTravel className="text-4xl my-auto" />
-        <Link href="/" className="my-auto block">
-          LUXLAS
-        </Link>
-      </div>
+        <span className="my-auto block">LUXLAS</span>
+      </Link>
       {showFilter === false ? (
         <div className="w-full sm:w-[280px] border py-1.5 border-gray-200 rounded-full shadow hover:shadow-lg cursor-pointer flex justify-between pl-6 pr-2">
           <div
@@ -266,7 +276,7 @@ export default function Navbar() {
             href={`/users/signin`}
             className="font-semibold text-sm my-auto px-4 py-3 rounded-full hover:bg-gray-50"
           >
-            로그인 후 사용해주세요
+            임대인하기
           </Link>
         )}
 
